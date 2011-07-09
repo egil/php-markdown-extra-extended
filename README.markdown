@@ -16,7 +16,7 @@ It is now possible to add the optional `cite` attribute to the `blockquote` elem
 The new, optional, syntax is:
 
 ```markdown
-> [cite url] Cite content follows
+> (cite url) Cite content follows
 ```
 
 The existing rules for and [formatting options](http://daringfireball.net/projects/markdown/syntax#blockquote) for blockquotes still apply.
