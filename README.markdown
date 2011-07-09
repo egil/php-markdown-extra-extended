@@ -24,13 +24,17 @@ The existing rules for and [formatting options](http://daringfireball.net/projec
 #### Example:
 
 ```markdown
-> (http://www.whatwg.org/specs/web-apps/current-work/multipage/grouping-content.html#the-blockquote-element) Content inside a [blockquote](http://www.whatwg.org/specs/web-apps/current-work/multipage/grouping-content.html#the-blockquote-element) must be quoted from another source, whose address, if it has one, may be cited in the `cite` attribute.
+> (http://www.whatwg.org/) Content inside a blockquote must be quoted 
+> from another source, whose address, if it has one, 
+> may be cited in the `cite` attribute.
 ```
 
 Will result in the following HTML:
 
 ```
-<blockquote cite="http://www.whatwg.org/specs/web-apps/current-work/multipage/grouping-content.html#the-blockquote-element">
-<p>Content inside a <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/grouping-content.html#the-blockquote-element">blockquote</a> must be quoted from another source, whose address, if it has one, may be cited in the `cite` attribute.
+<blockquote cite="http://www.whatwg.org/">
+<p>Content inside a blockquote must be quoted 
+from another source, whose address, if it has one, 
+may be cited in the `cite` attribute.
 </p>
 </blockquote>
