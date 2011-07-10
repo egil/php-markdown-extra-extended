@@ -16,7 +16,7 @@ It is now possible to add the optional `cite` attribute to the `blockquote` elem
 The new, optional, syntax is:
 
 ```markdown
-> (cite url) Cite content follows
+> (cite url) Cited content follows ...
 ```
 
 The existing rules for and [formatting options](http://daringfireball.net/projects/markdown/syntax#blockquote) for blockquotes still apply.
@@ -35,6 +35,6 @@ Will result in the following HTML:
 <blockquote cite="http://www.whatwg.org/">
 <p>Content inside a blockquote must be quoted 
 from another source, whose address, if it has one, 
-may be cited in the `cite` attribute.
-</p>
+may be cited in the `cite` attribute.</p>
 </blockquote>
+```

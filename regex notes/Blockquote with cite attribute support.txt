@@ -1,0 +1,40 @@
+﻿Blockquotes with cite attribute support
+
+(?>[ ]*>[ ]?
+(?:\((.+?)\))?
+[ ]*(.+\n(?:.+\n)*)
+)+
+
+Options: dot matches newline; free-spacing
+
+Atomic group.  Match the regex below, and do not try further permutations of it if the overall match fails. «(?>[ ]*>[ ]?
+(?:\((.+?)\))?
+[ ]*(.+\n(?:.+\n)*)
+)+»
+   Between one and unlimited times, as many times as possible, giving back as needed (greedy) «+»
+   Match the character “ ” «[ ]*»
+      Between zero and unlimited times, as many times as possible, giving back as needed (greedy) «*»
+   Match the character “>” literally «>»
+   Match the character “ ” «[ ]?»
+      Between zero and one times, as many times as possible, giving back as needed (greedy) «?»
+   Match the regular expression below «(?:\((.+?)\))?»
+      Between zero and one times, as many times as possible, giving back as needed (greedy) «?»
+      Match the character “(” literally «\(»
+      Match the regular expression below and capture its match into backreference number 1 «(.+?)»
+         Match any single character «.+?»
+            Between one and unlimited times, as few times as possible, expanding as needed (lazy) «+?»
+      Match the character “)” literally «\)»
+   Match the character “ ” «[ ]*»
+      Between zero and unlimited times, as many times as possible, giving back as needed (greedy) «*»
+   Match the regular expression below and capture its match into backreference number 2 «(.+\n(?:.+\n)*)»
+      Match any single character «.+»
+         Between one and unlimited times, as many times as possible, giving back as needed (greedy) «+»
+      Match a line feed character «\n»
+      Match the regular expression below «(?:.+\n)*»
+         Between zero and unlimited times, as many times as possible, giving back as needed (greedy) «*»
+         Match any single character «.+»
+            Between one and unlimited times, as many times as possible, giving back as needed (greedy) «+»
+         Match a line feed character «\n»
+
+
+Created with RegexBuddy
