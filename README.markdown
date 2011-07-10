@@ -57,6 +57,8 @@ Will result in the following HTML:
 ### Fenced code block with language support and alternating fence markers (```)
 It is now possible to specify the language type of a code block, and use an alternatinge fence markers (```), enabling the same syntax as that of <abbr title="GitHub Flavored Markdown">GFM</abbr>.
 
+This addition follows the [suggested way](http://dev.w3.org/html5/spec-author-view/the-code-element.html#the-code-element) to specify language by W3C.
+
 #### Example:
 
 	~~~html
