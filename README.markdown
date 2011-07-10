@@ -62,15 +62,15 @@ It is now possible to specify the language type of a code block, and use an alte
 ```
 ~~~html
 <p>Ut brisket flank salami.  Cow cupidatat ex t-bone sirloin id.</p>
-~~~
+\~~~
 ```
 
 Using alternative fence markers:
 
 ```
-```html
+\```html
 <p>Ut brisket flank salami.  Cow cupidatat ex t-bone sirloin id.</p>
-```
+\```
 ```
 
 Both will output the following HTML:
