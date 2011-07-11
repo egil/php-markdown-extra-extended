@@ -2,9 +2,11 @@
 
 An fork of the [PHP Markdown (Extra) project](http://michelf.com/projects/php-markdown/) (<abbr title="PHP Markdown (Extra)">PME</abbr>), extended with extra syntax, especially focused on adding support for more HTML attributes to outputted HTML, and for outputting HTML5.
 
-Unless explicitly specified, existing Markdown markup works exactly as it did before.
-
 ## Changes to syntax from PHP Markdown (Extra)
+Unless explicitly specified, existing Markdown markup works exactly as it did before. The orginal syntax is documentated here:
+
+- [Markdown syntax](http://daringfireball.net/projects/markdown/syntax)
+- [Markdown Extra syntax](http://michelf.com/projects/php-markdown/extra/)
 
 ### Line break generates a `<br />`
 In <abbr title="PHP Markdown (Extra)">PME</abbr>, when you want to insert a `<br />` break tag using Markdown, you end a line with two or more spaces, then type return. This turned out to be more annoying than helpful in my projects, so now you just have to type return. This is also how Markdown works with <abbr title="GitHub Flavored Markdown">GFM</abbr>.
