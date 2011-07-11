@@ -4,7 +4,7 @@ An fork of the [PHP Markdown (Extra) project](http://michelf.com/projects/php-ma
 
 Unless explicitly specified, existing Markdown markup works exactly as it did before.
 
-## Changes from PHP Markdown
+## Changes to syntax from PHP Markdown (Extra)
 
 ### Line break generates a `<br />`
 In <abbr title="PHP Markdown (Extra)">PME</abbr>, when you want to insert a `<br />` break tag using Markdown, you end a line with two or more spaces, then type return. This turned out to be more annoying than helpful in my projects, so now you just have to type return. This is also how Markdown works with <abbr title="GitHub Flavored Markdown">GFM</abbr>.
@@ -77,4 +77,23 @@ Both will output the following HTML:
 <pre><code class="language-html">
 <p>Ut brisket flank salami.  Cow cupidatat ex t-bone sirloin id.</p>
 </code></pre>
+```
+
+## Settings
+There are some new settings that can be applied to the parser.
+
+### Defining default CSS classes for all tags of a specific type
+It is now possible to append default CSS classes to all tags of a specific type, unless they are nested inside a `<code>` tag. Existing CSS classes will not be overwritten.
+
+It is done through the `MarkdownExtraExtended_Parser::$default_classes` array:
+
+```php
+MarkdownExtraExtended_Parser::$default_classes['TAG'] = 'default classes';
+```
+
+In the following example we add support for [Googles Javascript code prettifier](http://code.google.com/p/google-code-prettify/) by adding the *prettyprint* class to all `<pre>` tags. 
+
+```php
+// Always add a 'prettyprint' to <pre> elements
+MarkdownExtraExtended_Parser::$default_classes['pre'] = 'prettyprint';
 ```

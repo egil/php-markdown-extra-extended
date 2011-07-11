@@ -1,8 +1,43 @@
 <?php
+define( 'MARKDOWNEXTRAEXTENDED_VERSION',  "0.2" ); # 7/11/2011
+define( 'MARKDOWN_PARSER_CLASS',  'MarkdownExtraExtended_Parser' );
 
-define( 'MARKDOWNEXTRAEXTENDED_VERSION',  "0.1" ); # 7/10/2011
+require_once('markdown.php');
 
 class MarkdownExtraExtended_Parser extends MarkdownExtra_Parser {
+	
+	public static $default_classes = array();
+	
+	function MarkdownExtraExtended_Parser() {
+		$this->document_gamut += array(
+			"doAddDefaultClasses" => 1000
+		);		
+		parent::MarkdownExtra_Parser();
+	}
+	
+	function doAddDefaultClasses($text) {	
+		// Dont wast time if there is no default classes defined
+		if(!empty(self::$default_classes)){
+			$doc = new DOMDocument();
+			$doc->loadHTML($text);
+			$xpath = new DOMXpath($doc);			
+
+			// Iterate over all default classes tag-class sets
+			// and update each tag with the classes.
+			foreach (self::$default_classes as $tag => $classes){
+				$query = '//' . $tag . '[not(ancestor::code)]';
+				foreach($xpath->query($query) as $element){
+					$classAttr = trim($element->getAttribute('class'));
+					$classAttr .= empty($classAttr) ? $classes : " $classes";
+					$element->setAttribute("class", $classAttr);
+				}
+			}
+			
+			// save the updated html
+			$text = $doc->saveHTML();
+		}
+		return $text;
+	}	
 	
 	function doHardBreaks($text) {
 		# Do hard breaks:
@@ -23,6 +58,7 @@ class MarkdownExtraExtended_Parser extends MarkdownExtra_Parser {
 
 		return $text;
 	}
+	
 	function _doBlockQuotes_callback($matches) {
 		$cite = $matches[1];
 		$bq = '> ' . $matches[2];
@@ -43,13 +79,6 @@ class MarkdownExtraExtended_Parser extends MarkdownExtra_Parser {
 	}
 
 	function doFencedCodeBlocks($text) {
-	#
-	# Adding the fenced code block syntax to regular Markdown:
-	#
-	# ~~~
-	# Code block
-	# ~~~
-	#
 		$less_than_tab = $this->tab_width;
 		
 		$text = preg_replace_callback('{
@@ -76,6 +105,7 @@ class MarkdownExtraExtended_Parser extends MarkdownExtra_Parser {
 
 		return $text;
 	}
+	
 	function _doFencedCodeBlocks_callback($matches) {
 		$codeblock = $matches[3];
 		$codeblock = htmlspecialchars($codeblock, ENT_NOQUOTES);
