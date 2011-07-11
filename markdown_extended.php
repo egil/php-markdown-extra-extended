@@ -6,13 +6,19 @@ require_once('markdown.php');
 
 class MarkdownExtraExtended_Parser extends MarkdownExtra_Parser {
 	
-	public static $default_classes = array();
+	public static $default_classes = array();	
 	
 	function MarkdownExtraExtended_Parser() {
-		$this->document_gamut += array(
-			"doAddDefaultClasses" => 1000
-		);		
 		parent::MarkdownExtra_Parser();
+	}
+	
+	function transform($text) {	
+		$text = parent::transform($text);
+
+		// add default classes
+		$text = $this->doAddDefaultClasses($text);
+				
+		return $text;		
 	}
 	
 	function doAddDefaultClasses($text) {	
@@ -47,9 +53,10 @@ class MarkdownExtraExtended_Parser extends MarkdownExtra_Parser {
 			array(&$this, '_doHardBreaks_callback'), $text);
 	}
 
+
 	function doBlockQuotes($text) {
 		$text = preg_replace_callback('/
-			(?>[ ]*>[ ]?
+			(?>^[ ]*>[ ]?
 				(?:\((.+?)\))?
 				[ ]*(.+\n(?:.+\n)*)
 			)+	
