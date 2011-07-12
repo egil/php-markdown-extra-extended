@@ -167,38 +167,41 @@ form.inline p {margin-bottom:0;}
 
 
 #container {
-	padding: 1em;
+	padding: .5em;
 }
 
-#testarea {
-	width: 48%;		
+.column {		
+	width: 32%;
 	float: left;
+	margin: 0 5px;
 }
-
-#testoutput {		
-	width: 48%;
-	float: right;
-}
-
-#result {
+.content-area {
 	border: thin solid #ccc;	
 	padding: 5px;	
+	line-height: 1.5;	
 }
 
-#input {	
-	border: thin solid #ccc;
-	width: 100%;
+pre.content-area, #result.content-area {
+	overflow: hidden;
+	overflow-y: auto;
+}
+
+pre {
+	position: relative;
+	top: -2px;
 }
 
 textarea {
-	width: 97%;
+	font: 1em 'consolas', 'andale mono', 'lucida console', monospace;	
+	line-height: 1.5;	
+	width: 98%;
 	resize: vertical;
 	border: none;
-	outline: none;
+	outline: none;	
 }
 
 button {
-		margin-top: 10px;
+	margin-top: 10px;
 }
 
 

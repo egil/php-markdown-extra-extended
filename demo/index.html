@@ -5,78 +5,38 @@
 	<title>PHP Markdown Extra Extended Test Page</title>
 	<meta name="author" content="Egil Hansen - http://egilhansen.com">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="css/style.css?v=3">
+	<link rel="stylesheet" href="css/style.css?v=4">
+	<link rel="stylesheet" href="css/libs/sunburst.css" />
 </head>
 <body>
 	<div id="container">
 		<header>
 			<h1>PHP Markdown Extra Extended Test Page</h1>
 		</header>		
-		<div id="testarea">
-			<h2>Markdown Test Area</h2>
+		<div class="column">
+			<h2>Markdown Input</h2>
 			<form>				
-				<div id="input"><textarea name="markdown" tabindex="1"></textarea></div>
+				<div id="input" class="content-area"><textarea name="markdown" tabindex="1"></textarea></div>
 				<div>
 					<button type="submit">Submit</button>
 					<button type="reset">Reset</button>
 				</div>			
 			</form>
 		</div>
-		<div id="testoutput">
-			<h2>Markdown Output Area</h2>
-			<div id="result"></div>
+		<div class="column">
+			<h2>Markdown Output</h2>
+			<div id="result" class="content-area"></div>
+		</div>
+		<div class="column">
+			<h2>HTML Output</h2>
+			<pre class="content-area prettyprint"><code id="rawoutput" class="language-html"></code></pre>
 		</div>
 	</div>
-	<script src="/demo/js/jquery-1.6.2.min.js"></script>    
-	<script src="/demo/js/jquery.cookie.js"></script>
+	<script src="/demo/js/libs/jquery-1.6.2.min.js"></script>    
   <script>window.jQuery || document.write("<script src='//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.js'>\x3C/script>")</script>	
-	<script>		
-		$(function(){
-			var resizeBoxes = function(){
-				var h = $(window).height() - $('header').innerHeight() - 130;
-				$('textarea').css('height', (h - 11) + 'px');
-				$('#result').css('height', h + 'px');
-			};
-			
-			// resize boxes to fit screen
-			resizeBoxes();
-			
-			// load data from cookie
-			$('textarea').val($.cookie('pmee_testdata')).focus();
-			
-						
-			// bindings
-			$(window).resize(resizeBoxes);
-			
-			$('form').bind("reset", function(){
-				$.cookie('pmee_testdata', null);
-			});
-
-			// post to server
-			$('form').submit(function(){
-				var testdata = $('textarea').val();
-				// some processing colors and UI niceness
-				$('#result').html('').css('background-color', '#EBF765');
-				$('button[type=submit]').attr('disabled', 'disabled');
-				// save testdata in cookie for next reload
-				$.cookie('pmee_testdata', testdata);
-				// submit and wait for markup
-				$.ajax({
-					url: '/demo/service.php',
-					data: { 'markdown': testdata },
-					dataType: 'text',
-					type: 'POST',
-					success: function(res, status, xhr){
-						// update UI
-						$('#result').html(res).css('background-color', 'transparent');
-						$('textarea').focus();
-						$('button[type=submit]').removeAttr('disabled');
-					}
-				});
-				return false;
-			});
-		});
-		
-	</script>
+	<script src="/demo/js/libs/jquery.cookie.js"></script>	
+	<script src="/demo/js/libs/prettify.js"></script>
+	<script src="/demo/js/script.js"></script>
+	
 </body>
 </html>
