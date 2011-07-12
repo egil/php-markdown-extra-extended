@@ -1,0 +1,20 @@
+Adding CSS Classes Test {h1}
+=======================
+
+Paragraphs {h2}
+----------
+
+{paragraph} This is a regular paragraph with css added in front, a space seperateing.
+
+{paragraph}This is a regular paragraph with css added in front, on same line.
+
+{paragraph}
+This is a regular paragraph with css added in front, a new line seperating.
+
+This is a regular paragraph with css added at the end, a space seperateing. {paragraph}
+
+This is a regular paragraph with css added at the end, on same line.{paragraph}
+
+This is a regular paragraph with css added at the end, a new line seperating.
+{paragraph}
+
