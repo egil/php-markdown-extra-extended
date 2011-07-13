@@ -1,4 +1,3 @@
-
 # PHP Markdown Extra Extended
 
 An fork of the [PHP Markdown (Extra) project](http://michelf.com/projects/php-markdown/) (<abbr title="PHP Markdown (Extra)">PME</abbr>), extended with extra syntax, especially focused on adding support for more HTML attributes to outputted HTML, and for outputting HTML5.
@@ -9,10 +8,10 @@ Unless explicitly specified, existing Markdown markup works exactly as it did be
 - [Markdown syntax](http://daringfireball.net/projects/markdown/syntax)
 - [Markdown Extra syntax](http://michelf.com/projects/php-markdown/extra/)
 
-### Line break generates a *<br />*
-In <abbr title="PHP Markdown (Extra)">PME</abbr>, when you want to insert a *<br />* break tag using Markdown, you end a line with two or more spaces, then type return. This turned out to be more annoying than helpful in my projects, so now you just have to type return. This is also how Markdown works with <abbr title="GitHub Flavored Markdown">GFM</abbr>.
+### Line break generates a `<br />`
+In <abbr title="PHP Markdown (Extra)">PME</abbr>, when you want to insert a `<br />` break tag using Markdown, you end a line with two or more spaces, then type return. This turned out to be more annoying than helpful in my projects, so now you just have to type return. This is also how Markdown works with <abbr title="GitHub Flavored Markdown">GFM</abbr>.
 
-Two returns does not insert a *<br />*, but instead creates a new paragraph as usual.
+Two returns does not insert a `<br />`, but instead creates a new paragraph as usual.
 
 ### Support for *cite* attribute on blockquotes
 It is now possible to add the optional *cite* attribute to the *blockquote* element.
@@ -128,15 +127,15 @@ $html = MarkdownExtended($markdown);
 There are some new settings that can be applied to the parser.
 
 ### Defining default CSS classes for all tags of a specific type
-It is now possible to append default CSS classes to all tags of a specific type, unless they are nested inside a *<code>* tag. Existing CSS classes will not be overwritten.
+It is now possible to append default CSS classes to all tags of a specific type, unless they are nested inside a `<code>` tag. Existing CSS classes will not be overwritten.
 
-It is done through the second argument to the *MarkdownExtended* function:
+It is done through the second argument to the `MarkdownExtended` function:
 
 ```PHP
 $html = MarkdownExtended($markdown, array('tag' => 'css classes', 'anotherTag' => 'css classes'));
 ```
 
-In the following example we add support for [Googles Javascript code prettifier](http://code.google.com/p/google-code-prettify/) by adding the *prettyprint* class to all *<pre>* tags. 
+In the following example we add support for [Googles Javascript code prettifier](http://code.google.com/p/google-code-prettify/) by adding the *prettyprint* class to all `<pre>` tags. 
 
 ```PHP
 // Always add a 'prettyprint' to <pre> elements
