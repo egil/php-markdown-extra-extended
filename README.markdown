@@ -91,18 +91,23 @@ A optional *figure caption* can be added to either the top of the figure or the 
 
 #### Examples
 This example shows a *figure* without a caption:
+
 ```markdown
 ===
 ![](img/reference.png)
 ===
 ```
+
 This example shows a *figure* with a caption added before the content:
+
 ```markdown
 === [A **happy face** is good for web developers]
 ![](img/reference.png)
 ===
 ```
+
 This example shows a *figure* with a caption added after the content:
+
 ```markdown
 ===
 ![](img/reference.png)
