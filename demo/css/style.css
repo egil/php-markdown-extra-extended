@@ -204,7 +204,10 @@ button {
 	margin-top: 10px;
 }
 
-
+.feedback {
+	padding: 0px 10px;
+	line-height: 1.5;
+}
 
 
 

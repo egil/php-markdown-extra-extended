@@ -8,11 +8,17 @@ function MarkdownExtended($text, $default_claases = array()){
 }
 
 class MarkdownExtraExtended_Parser extends MarkdownExtra_Parser {
-	
-	private $default_classes;
-	
+	# Tags that are always treated as block tags:
+	var $block_tags_re = 'figure|figcaption|p|div|h[1-6]|blockquote|pre|table|dl|ol|ul|address|form|fieldset|iframe|hr|legend';
+	var $default_classes;
+		
 	function MarkdownExtraExtended_Parser($default_classes = array()) {
-    $default_classes = $default_classes;
+	    $default_classes = $default_classes;
+		
+		$this->block_gamut += array(
+			"doFencedFigures" => 7,
+		);
+		
 		parent::MarkdownExtra_Parser();
 	}
 	
@@ -129,5 +135,54 @@ class MarkdownExtraExtended_Parser extends MarkdownExtra_Parser {
 		return "\n\n".$this->hashBlock($cb)."\n\n";
 	}
 
+	function doFencedFigures($text){
+		$text = preg_replace_callback('{
+			(?:\n|\A)
+			# 1: Opening marker
+			(
+				={3,} # Marker: equal sign.
+			)
+			
+			[ ]?(?:\[([^\]]+)\])?[ ]* \n # Whitespace and newline following marker.
+			
+			# 3: Content
+			(
+				(?>
+					(?!\1 [ ]?(?:\[([^\]]+)\])?[ ]* \n)	# Not a closing marker.
+					.*\n+
+				)+
+			)
+			
+			# Closing marker.
+			\1 [ ]?(?:\[([^\]]+)\])?[ ]* \n
+		}xm', array(&$this, '_doFencedFigures_callback'), $text);		
+		
+		return $text;	
+	}
+	
+	function _doFencedFigures_callback($matches) {
+		# get figcaption
+		$topcaption = empty($matches[2]) ? null : $this->runBlockGamut($matches[2]);
+		$bottomcaption = empty($matches[4]) ? null : $this->runBlockGamut($matches[4]);
+		$figure = $matches[3];
+		$figure = $this->runBlockGamut($figure); # recurse
+
+		$figure = preg_replace('/^/m', "  ", $figure);
+		# These leading spaces cause problem with <pre> content, 
+		# so we need to fix that - reuse blockqoute code to handle this:
+		$figure = preg_replace_callback('{(\s*<pre>.+?</pre>)}sx', 
+			array(&$this, '_doBlockQuotes_callback2'), $figure);
+		
+		$res = "<figure>";
+		if(!empty($topcaption)){
+			$res .= "\n<figcaption>$topcaption</figcaption>";
+		}
+		$res .= "\n$figure\n";
+		if(!empty($bottomcaption) && empty($topcaption)){
+			$res .= "<figcaption>$bottomcaption</figcaption>";
+		}
+		$res .= "</figure>";		
+		return "\n". $this->hashBlock($res)."\n\n";
+	}
 }
 ?>

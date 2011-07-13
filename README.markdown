@@ -1,3 +1,4 @@
+
 # PHP Markdown Extra Extended
 
 An fork of the [PHP Markdown (Extra) project](http://michelf.com/projects/php-markdown/) (<abbr title="PHP Markdown (Extra)">PME</abbr>), extended with extra syntax, especially focused on adding support for more HTML attributes to outputted HTML, and for outputting HTML5.
@@ -80,6 +81,33 @@ Both will output the following HTML:
 <p>Ut brisket flank salami.  Cow cupidatat ex t-bone sirloin id.</p>
 </code></pre>
 ```
+
+### Support for *figure* and *figcaption* tags
+There is now experimental support for the the HTML5 tags *[figure](http://dev.w3.org/html5/markup/figure.html)* and *[figcaption](http://dev.w3.org/html5/markup/figcaption.html)*.
+
+A *figure* is a block level element and is created by wrapping some other content in three or more equal (=) signs. 
+
+A optional *figure caption* can be added to either the top of the figure or the bottom at the figure, right after the equal signs, wrapped in [ and ] signs.
+
+#### Examples
+This example shows a *figure* without a caption:
+```markdown
+===
+![](img/reference.png)
+===
+```
+This example shows a *figure* with a caption added before the content:
+```markdown
+=== [A **happy face** is good for web developers]
+![](img/reference.png)
+===
+```
+This example shows a *figure* with a caption added after the content:
+```markdown
+===
+![](img/reference.png)
+===
+``` [A **happy face** is good for web developers]
 
 ## Usage
 You need both the *markdown.php* and the *markdown_extended.php* files, but only needs to include *markdown_extended.php*.

@@ -10,7 +10,8 @@ $(function(){
 	
 	// load data from cookie
 	$('textarea').val($.cookie('pmee_testdata')).focus();
-	
+
+	$('#submit-count').data('count', 0);	
 				
 	// bindings
 	$(window).resize(resizeBoxes);
@@ -22,12 +23,15 @@ $(function(){
 	// post to server
 	$('form').submit(function(){
 		var testdata = $('textarea').val();
+		
 		// some processing colors and UI niceness
 		$('#result').html('').css('background-color', '#EBF765');
 		$('#rawoutput').html('');
 		$('button[type=submit]').attr('disabled', 'disabled');
+		
 		// save testdata in cookie for next reload
-		$.cookie('pmee_testdata', testdata);
+		$.cookie('pmee_testdata', testdata, { expires: 7, path: '/demo/' });
+		
 		// submit and wait for markup
 		$.ajax({
 			url: '/demo/service.php',
@@ -38,6 +42,9 @@ $(function(){
 				// update UI
 				$('#result').html(res).css('background-color', 'transparent');
 				$('#rawoutput').text(res);
+				$('#submit-count').text('#' + ($('#submit-count').data('count') + 1));				
+				$('#submit-count').data('count', $('#submit-count').data('count') + 1);
+				$('#last-submit').text(new Date().toLocaleString());
 				prettyPrint();
 				$('textarea').focus();
 				$('button[type=submit]').removeAttr('disabled');
