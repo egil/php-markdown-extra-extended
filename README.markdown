@@ -9,13 +9,13 @@ Unless explicitly specified, existing Markdown markup works exactly as it did be
 - [Markdown syntax](http://daringfireball.net/projects/markdown/syntax)
 - [Markdown Extra syntax](http://michelf.com/projects/php-markdown/extra/)
 
-### Line break generates a `<br />`
-In <abbr title="PHP Markdown (Extra)">PME</abbr>, when you want to insert a `<br />` break tag using Markdown, you end a line with two or more spaces, then type return. This turned out to be more annoying than helpful in my projects, so now you just have to type return. This is also how Markdown works with <abbr title="GitHub Flavored Markdown">GFM</abbr>.
+### Line break generates a *<br />*
+In <abbr title="PHP Markdown (Extra)">PME</abbr>, when you want to insert a *<br />* break tag using Markdown, you end a line with two or more spaces, then type return. This turned out to be more annoying than helpful in my projects, so now you just have to type return. This is also how Markdown works with <abbr title="GitHub Flavored Markdown">GFM</abbr>.
 
-Two returns does not insert a `<br />`, but instead creates a new paragraph as usual.
+Two returns does not insert a *<br />*, but instead creates a new paragraph as usual.
 
-### Support for `cite` attribute on blockquotes
-It is now possible to add the optional `cite` attribute to the `blockquote` element.
+### Support for *cite* attribute on blockquotes
+It is now possible to add the optional *cite* attribute to the *blockquote* element.
 
 The new, optional, syntax is:
 
@@ -42,12 +42,13 @@ may be cited in the `cite` attribute.</p>
 ```
 
 #### Breaking changes from <abbr title="PHP Markdown (Extra)">PME</abbr>
-The existing rules for and [formatting options](http://daringfireball.net/projects/markdown/syntax#blockquote) for blockquotes still apply. There is one small breaking changes with this addition. If your quote starts with `(` you have two have at least two spaces between the initial `>` and the `(`. E.g.:
+The existing rules for and [formatting options](http://daringfireball.net/projects/markdown/syntax#blockquote) for blockquotes still apply. There is one small breaking changes with this addition. If your quote starts with "(" you have two have at least two spaces between the initial ">" and the "(". E.g.:
 
 ```markdown
 >  (Ut brisket flank salami.) Cow cupidatat ex t-bone sirloin id. 
 > Sunt flank pastrami spare ribs sint id, nulla nisi.
 ```
+
 Will result in the following HTML:
 
 ```html
@@ -111,8 +112,8 @@ This example shows a *figure* with a caption added after the content:
 ```markdown
 ===
 ![](img/reference.png)
-===
-``` [A **happy face** is good for web developers]
+=== [A **happy face** is good for web developers]
+``` 
 
 ## Usage
 You need both the *markdown.php* and the *markdown_extended.php* files, but only needs to include *markdown_extended.php*.
@@ -127,15 +128,15 @@ $html = MarkdownExtended($markdown);
 There are some new settings that can be applied to the parser.
 
 ### Defining default CSS classes for all tags of a specific type
-It is now possible to append default CSS classes to all tags of a specific type, unless they are nested inside a `<code>` tag. Existing CSS classes will not be overwritten.
+It is now possible to append default CSS classes to all tags of a specific type, unless they are nested inside a *<code>* tag. Existing CSS classes will not be overwritten.
 
-It is done through the second argument to the `MarkdownExtended` function:
+It is done through the second argument to the *MarkdownExtended* function:
 
 ```PHP
 $html = MarkdownExtended($markdown, array('tag' => 'css classes', 'anotherTag' => 'css classes'));
 ```
 
-In the following example we add support for [Googles Javascript code prettifier](http://code.google.com/p/google-code-prettify/) by adding the *prettyprint* class to all `<pre>` tags. 
+In the following example we add support for [Googles Javascript code prettifier](http://code.google.com/p/google-code-prettify/) by adding the *prettyprint* class to all *<pre>* tags. 
 
 ```PHP
 // Always add a 'prettyprint' to <pre> elements
