@@ -1,6 +1,6 @@
 <?php
 require_once('markdown.php');
-define( 'MARKDOWNEXTRAEXTENDED_VERSION',  "0.2" ); # 7/11/2011
+define( 'MARKDOWNEXTRAEXTENDED_VERSION',  "0.3" );
 
 function MarkdownExtended($text, $default_claases = array()){
   $parser = new MarkdownExtraExtended_Parser($default_claases);
@@ -23,37 +23,9 @@ class MarkdownExtraExtended_Parser extends MarkdownExtra_Parser {
 	}
 	
 	function transform($text) {	
-		$text = parent::transform($text);
-
-		// add default classes
-		$text = $this->doAddDefaultClasses($text);
-				
+		$text = parent::transform($text);				
 		return $text;		
 	}
-	
-	function doAddDefaultClasses($text) {	
-		// Dont wast time if there is no default classes defined
-		if(!empty($default_classes)){
-			$doc = new DOMDocument();
-			$doc->loadHTML($text);
-			$xpath = new DOMXpath($doc);			
-
-			// Iterate over all default classes tag-class sets
-			// and update each tag with the classes.
-			foreach ($default_classes as $tag => $classes){
-				$query = '//' . $tag . '[not(ancestor::code)]';
-				foreach($xpath->query($query) as $element){
-					$classAttr = trim($element->getAttribute('class'));
-					$classAttr .= empty($classAttr) ? $classes : " $classes";
-					$element->setAttribute("class", $classAttr);
-				}
-			}
-			
-			// save the updated html
-			$text = $doc->saveHTML();
-		}
-		return $text;
-	}	
 	
 	function doHardBreaks($text) {
 		# Do hard breaks:

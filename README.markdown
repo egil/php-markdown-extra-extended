@@ -123,21 +123,3 @@ require_once('markdown_extended.php');
 // Convert markdown formatted text in $markdown to HTML
 $html = MarkdownExtended($markdown);
 ```
-
-There are some new settings that can be applied to the parser.
-
-### Defining default CSS classes for all tags of a specific type
-It is now possible to append default CSS classes to all tags of a specific type, unless they are nested inside a `<code>` tag. Existing CSS classes will not be overwritten.
-
-It is done through the second argument to the `MarkdownExtended` function:
-
-```PHP
-$html = MarkdownExtended($markdown, array('tag' => 'css classes', 'anotherTag' => 'css classes'));
-```
-
-In the following example we add support for [Googles Javascript code prettifier](http://code.google.com/p/google-code-prettify/) by adding the *prettyprint* class to all `<pre>` tags. 
-
-```PHP
-// Always add a 'prettyprint' to <pre> elements
-$html = MarkdownExtended($markdown, array('pre' => 'prettyprint'));
-```
