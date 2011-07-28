@@ -77,7 +77,7 @@ class MarkdownExtraExtended_Parser extends MarkdownExtra_Parser {
 					~{3,}|`{3,} # Marker: three tilde or more.
 				)
 				
-				[ ]?(\w+)?[ ]* \n # Whitespace and newline following marker.
+				[ ]?(\w+)?(?:,[ ]?(\d+))?[ ]* \n # Whitespace and newline following marker.
 				
 				# 3: Content
 				(
@@ -96,12 +96,13 @@ class MarkdownExtraExtended_Parser extends MarkdownExtra_Parser {
 	}
 	
 	function _doFencedCodeBlocks_callback($matches) {
-		$codeblock = $matches[3];
+		$codeblock = $matches[4];
 		$codeblock = htmlspecialchars($codeblock, ENT_NOQUOTES);
 		$codeblock = preg_replace_callback('/^\n+/',
 			array(&$this, '_doFencedCodeBlocks_newlines'), $codeblock);
 		//$codeblock = "<pre><code>$codeblock</code></pre>";
-		$cb = "<pre><code";
+		//$cb = "<pre><code";
+		$cb = empty($matches[3]) ? "<pre><code" : "<pre class=\"linenums:$matches[3]\"><code"; 
 		$cb .= empty($matches[2]) ? ">" : " class=\"language-$matches[2]\">";
 		$cb .= "$codeblock</code></pre>";
 		return "\n\n".$this->hashBlock($cb)."\n\n";
