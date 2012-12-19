@@ -136,7 +136,7 @@ class MarkdownExtraExtended_Parser extends MarkdownExtra_Parser {
 	function _doFencedFigures_callback($matches) {
 		# get figcaption
 		$topcaption = empty($matches[2]) ? null : $this->runBlockGamut($matches[2]);
-		$bottomcaption = empty($matches[4]) ? null : $this->runBlockGamut($matches[4]);
+		$bottomcaption = empty($matches[5]) ? null : $this->runBlockGamut($matches[5]);
 		$figure = $matches[3];
 		$figure = $this->runBlockGamut($figure); # recurse
 
