@@ -1,0 +1,11 @@
+{
+    "name": "brainsware/php-markdown-extra-extended",
+    "type": "library",
+    "description": "PHP Markdown & Extra",
+    "homepage": "https://github.com/Brainsware/php-markdown-extra-extended",
+    "keywords": ["markdown"],
+    "license": "MIT",
+    "require": {
+        "php": ">=5.3"
+    }
+}
