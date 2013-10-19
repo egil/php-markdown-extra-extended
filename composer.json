@@ -7,5 +7,8 @@
     "license": "MIT",
     "require": {
         "php": ">=5.3"
+    },
+    "autoload": {
+        "files": ["markdown.php", "markdown_extended.php"]
     }
 }
