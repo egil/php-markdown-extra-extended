@@ -18,7 +18,9 @@ class MarkdownExtraExtended_Parser extends MarkdownExtra_Parser {
 		$this->block_gamut += array(
 			"doFencedFigures" => 7,
 		);
-		
+		$this->span_gamut += array(
+			"doStrikethroughs" => -35
+		);
 		parent::MarkdownExtra_Parser();
 	}
 	
@@ -156,6 +158,20 @@ class MarkdownExtraExtended_Parser extends MarkdownExtra_Parser {
 		}
 		$res .= "</figure>";		
 		return "\n". $this->hashBlock($res)."\n\n";
+	}
+	function doStrikethroughs($text) {
+	#
+	# Replace ~~some deleted text~~ with <del>some deleted text</del>
+	#
+		$text = preg_replace_callback('{
+				~~([^~]+)~~
+			}xm',
+			array(&$this, '_doStrikethroughs_callback'), $text);
+		return $text;
+	}
+	function _doStrikethroughs_callback($matches) {
+		$res = "<del>" . $matches[1] . "</del>";
+		return $this->hashBlock($res);
 	}
 }
 ?>
